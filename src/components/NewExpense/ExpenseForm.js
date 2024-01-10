@@ -1,32 +1,42 @@
 import React, { useState } from "react";
-
 import "./ExpenseForm.css";
 
 function ExpenseForm() {
-  const [item, setItem] = useState("enter");
-  // const [item, setItem] = useState("");
+  const [item, setItem] = useState("");
   const [loc, setLoc] = useState("");
   const [amt, setAmt] = useState("");
   const [date, setDate] = useState("");
+
   const onclickHandler1 = (event) => {
-    console.log(event.target.value);
     setItem(event.target.value);
   };
+
   const onclickHandler2 = (event) => {
-    console.log(event.target.value);
     setLoc(event.target.value);
   };
+
   const onclickHandler3 = (event) => {
-    console.log(event.target.value);
     setAmt(event.target.value);
   };
+
   const onclickHandler4 = (event) => {
     setDate(event.target.value);
   };
 
+  const submitForm = (event) => {
+    event.preventDefault();
+    const expenseData = {
+      item,
+      loc,
+      amt,
+      date: new Date(date),
+    };
+    console.log(expenseData);
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={submitForm}>
         <div className="new-expense__controls">
           <div className="new-expense__control">
             <label>Expense Item</label>
@@ -42,7 +52,6 @@ function ExpenseForm() {
           </div>
           <div className="new-expense__control">
             <label>Date</label>
-            <input type="date" min="2023-09-09" max="2024-12-31" />
             <input
               type="date"
               min="2023-09-09"
@@ -58,4 +67,5 @@ function ExpenseForm() {
     </div>
   );
 }
+
 export default ExpenseForm;
