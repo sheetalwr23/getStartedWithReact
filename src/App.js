@@ -1,13 +1,12 @@
 // App.js
-import React from "react";
 import React, { useState } from "react";
-
 import ExpenseDetails from "./components/Expenses/ExpenseDetails";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 import "./components/Expenses/ExpenseItem.css";
+
 const App = () => {
-  const expenses = [
+  const initialExpenses = [
     {
       id: "e1",
       date: new Date(2023, 9, 13),
@@ -30,14 +29,16 @@ const App = () => {
       locationOfExpenditure: "Inox",
     },
   ];
-  const [expense, setExpense] = useState(expenses);
 
-  const addExpenseHandler = (expense) => {
-    setExpense((prevExpense) => {
-      return [...prevExpense, expense];
+  const [expenses, setExpenses] = useState(initialExpenses);
+
+  const addExpenseHandler = (newExpense) => {
+    setExpenses((prevExpenses) => {
+      return [...prevExpenses, newExpense];
     });
+
     console.log("in App.js");
-    console.log(expense);
+    console.log(expenses);
   };
 
   return (
@@ -48,12 +49,11 @@ const App = () => {
         </div>
       </div>
       <div>
-        <NewExpense />
-        <ExpenseDetails expenses={expenses} />
         <NewExpense onAddExpense={addExpenseHandler} />
-        <ExpenseDetails expenses={expense} />
+        <ExpenseDetails expenses={expenses} />
       </div>
     </div>
   );
 };
+
 export default App;
