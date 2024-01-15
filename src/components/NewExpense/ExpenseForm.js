@@ -1,73 +1,99 @@
-import React, { useState } from "react";
-import "./ExpenseForm.css";
+import React,{useState} from "react";
+ 
+import './ExpenseForm.css' 
 
-function ExpenseForm(props) {
-  const [item, setItem] = useState("");
-  const [loc, setLoc] = useState("");
-  const [amt, setAmt] = useState("");
-  const [date, setDate] = useState("");
+function ExpenseForm(props){
 
-  const submitForm = (event) => {
-    event.preventDefault();
-    const expenseData = {
-      item,
-      loc,
-      amt,
-      date: new Date(date),
-    };
-    console.log(expenseData);
-    setItem("");
-    setLoc("");
-    setAmt("");
-    setDate("");
-    props.onSaveExpenseData(expenseData);
-  };
+    const[title,setTitle]=useState('')
+    const [locationOfExpenditure,setLocationOfExpenditure]=useState('')
+    const [amount,setAmount]=useState('')
+    const [date,setDate]=useState('')
+    // const [userInput,setUserInput]=useState({
+    //     enteredItem:"",
+    //     enteredLoc:"",
+    //     enteredAmount:"",
+    //     enteredDate:""
+    // })
+    const onclickHandler1=(event)=>{
+        setTitle(event.target.value)
+        // setUserInput({
+        //     ...userInput,
+        //     enteredItem:event.target.value,
+        // })
+        // setUserInput((prevState)=>{
+        //    return{ ...prevState,
+        //     enteredItem:event.target.value,}
+        // })
+    }
+    const onclickHandler2=(event)=>{
+        setLocationOfExpenditure(event.target.value)
+        // setUserInput({
+        //     ...userInput,
+        //     enteredLoc:event.target.value,
+        // })
+        // setUserInput((prevState)=>{
+        //     return{ ...prevState,
+        //         enteredLoc:event.target.value,}
+        //  })
+    }
+    const onclickHandler3=(event)=>{
+        setAmount(event.target.value)
+        // setUserInput({
+        //     ...userInput,
+        //     enteredAmount:event.target.value,
+        // })
+        // setUserInput((prevState)=>{
+        //     return{ ...prevState,
+        //         enteredAmount:event.target.value,}
+        //  })
+    }
+    const onclickHandler4=(event)=>{
+        // setUserInput((prevState)=>{
+        //     return{ ...prevState,
+        //         enteredDate:event.target.value,}
+        //  })
+        setDate(event.target.value)
+    }
 
-  return (
-    <div>
-      <form onSubmit={submitForm}>
-        <div className="new-expense__controls">
-          <div className="new-expense__control">
+    const submitForm=(event)=>{
+        event.preventDefault();
+        const expenseData={
+            title,locationOfExpenditure,amount,date:new Date(date)
+        }
+       props.onSaveExpenseData(expenseData);
+       setTitle('')
+       setLocationOfExpenditure('')
+       setAmount('')
+       setDate('')
+    }
+
+
+
+    return(<div>
+        <form onSubmit={submitForm}>
+            <div className="new-expense__controls">
+            <div className="new-expense__control">
             <label>Expense Item</label>
-            <input
-              value={item}
-              onChange={(event) => setItem(event.target.value)}
-              type="text"
-            />
-          </div>
-          <div className="new-expense__control">
+            <input value={title} onChange={onclickHandler1} type="text"/>
+            </div>
+            <div className="new-expense__control">
             <label>Expenditure Location</label>
-            <input
-              value={loc}
-              onChange={(event) => setLoc(event.target.value)}
-              type="text"
-            />
-          </div>
-          <div className="new-expense__control">
+            <input value={locationOfExpenditure} onChange={onclickHandler2} type="text"/>
+            </div>
+            <div className="new-expense__control">
             <label>Expense Amount</label>
-            <input
-              value={amt}
-              onChange={(event) => setAmt(event.target.value)}
-              type="text"
-            />
-          </div>
-          <div className="new-expense__control">
+            <input value={amount} onChange={onclickHandler3}  type="text"/>
+            </div>
+            <div className="new-expense__control">
             <label>Date</label>
-            <input
-              value={date}
-              type="date"
-              min="2023-09-09"
-              max="2024-12-31"
-              onChange={(event) => setDate(event.target.value)}
-            />
-          </div>
-        </div>
-        <div className="new-expense__actions">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  );
+            <input value={date} type="date" min="2023-09-09" max="2024-12-31" onChange={onclickHandler4}/>
+            </div>           
+            </div>
+            <div className="new-expense__actions">
+            <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>)
 }
 
-export default ExpenseForm;
+export default ExpenseForm
